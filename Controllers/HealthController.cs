@@ -33,8 +33,7 @@ public class HealthController : ControllerBase
             message = "API is running",
             database = new
             {
-                connected = dbReachable,
-                status = dbReachable ? "reachable" : "unreachable"
+                connected = dbReachable ? "yes" : "no"
             }
         });
     }
