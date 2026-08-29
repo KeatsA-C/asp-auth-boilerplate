@@ -29,4 +29,16 @@ public class AuthController : ControllerBase
             return Conflict(new { message = ex.Message });
         }
     }
+
+    /// Authenticates a user and returns a JWT token.
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDto dto)
+    {
+        string? token = await _authService.LoginAsync(dto);
+
+        if (token is null)
+            return Unauthorized(new { success = false, message = "Invalid credentials" });
+
+        return Ok(new { success = true, token });
+    }
 }
